@@ -5,6 +5,6 @@ class Index
 {
     public function index()
     {
-        return "欢迎来到糯米!";
+        return "hello world";
     }
 }
