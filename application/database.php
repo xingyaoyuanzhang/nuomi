@@ -13,9 +13,9 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '33333',
+    'hostname'        => '33333111',
     // 数据库名
-    'database'        => '3333',
+    'database'        => '33331111',
     // 用户名
     'username'        => 'root',
     // 密码
