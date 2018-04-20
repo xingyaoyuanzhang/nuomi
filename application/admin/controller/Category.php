@@ -7,6 +7,11 @@ use think\Request;
 
 class Category extends Controller
 {
+
+    private $obj;
+    public function _initialize(){
+        $this->obj = model('category');
+    }
     /**
      * 显示分类
      *
@@ -14,7 +19,10 @@ class Category extends Controller
      */
     public function index()
     {
-        return $this->fetch();
+       $parentId = input('get.parent_id','0','intval');
+       $categorys = $this->obj->getFirstCategorys($parentId);
+       // var_dump($categorys);die();
+        return $this->fetch('',['categorys'=>$categorys]);
     }
     
     /**
@@ -24,7 +32,8 @@ class Category extends Controller
      */
     public function add()
     {
-        return $this->fetch();
+        $categorys = $this->obj->getFirstCategory();
+        return $this->fetch('',['categorys'=>$categorys]);
     }
     
     /**
@@ -38,6 +47,12 @@ class Category extends Controller
         $validate = validate('Category');
         if (!$validate->scene('add')->check($data)){
             $this->error($validate->getError());
+        }
+        $res = $this->obj->add($data);
+        if($res){
+            $this->success('分类添加成功');
+        }else{
+            $this->error('分类插入失败');
         }
     }
     
