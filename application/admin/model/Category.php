@@ -35,7 +35,7 @@ class Category extends Model
     	];
     	$result = $this->where($data)
     					->order($order)
-    					->paginate(2);
+    					->paginate();
     	// echo $this->getLastSql();
     	return $result;
     }
