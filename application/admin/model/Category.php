@@ -31,6 +31,7 @@ class Category extends Model
     		'status' => ['neq', -1],
     	];
     	$order = [
+            'listorder' => 'desc',
     		'id' => 'desc',
     	];
     	$result = $this->where($data)

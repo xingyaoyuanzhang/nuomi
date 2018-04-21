@@ -43,10 +43,16 @@ class Category extends Controller
      */
     public function save()
     {
+        if(!request()->isPost()){
+            $this->error('必须post提交');
+        }
         $data = input('post.');
         $validate = validate('Category');
         if (!$validate->scene('add')->check($data)){
             $this->error($validate->getError());
+        }
+        if(!empty($data['id'])){
+            return $this->update($data);
         }
         $res = $this->obj->add($data);
         if($res){
@@ -64,6 +70,37 @@ class Category extends Controller
          $categorys = $this->obj->getFirstCategory();
          return $this->fetch('',['categorys'=>$categorys,'category'=> $category]);
 
+    }
+
+    public function update($data){
+        $res = $this->obj->save($data,['id'=>intval($data['id'])]);
+        if($res){
+            $this->success('更新成功');
+        }else{
+            $this->error('更新失败');
+        }
+    }
+
+    public function listorder($id, $listorder){
+        $res = $this->obj->save(['listorder'=>$listorder],['id'=>$id]);
+        if($res){
+            $this->result($_SERVER['HTTP_REFERER'],1,'success');
+        }else{
+            $this->result($_SERVER['HTTP_REFERER'],0,'更新失败');
+        }
+    }
+    public function status(){
+        $data = input('get.');
+        $validate = validate('Category');
+        if (!$validate->scene('status')->check($data)){
+            $this->error($validate->getError());
+        }
+        $res = $this->obj->save(['status'=>$data['status']],['id'=>$data['id']]);
+        if($res){
+            $this->success('状态更新成功');
+        }else{
+            $this->error('状态更新失败');
+        }
     }
     
 
