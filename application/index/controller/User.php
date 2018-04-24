@@ -4,7 +4,6 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Request;
-
 class User extends Controller
 {
     /**
@@ -14,7 +13,9 @@ class User extends Controller
      */
     public function index()
     {
-        //
+        // \Map::getLngLat('江苏盐城亭湖北闸');
+        
+
     }
 
     /**
