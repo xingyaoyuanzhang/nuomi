@@ -20,7 +20,7 @@ class Email {
 		$mail->Host = 'smtp.163.com';
 		// dump($mail->Host = config('email.host'));
 //Set the SMTP port number - likely to be 25, 465 or 587
-		$mail->Port = 25;
+		$mail->Port = 465;
 		// dump($mail->Host = config('email.port'));
 //Whether to use SMTP authentication
 		$mail->SMTPAuth = true;
